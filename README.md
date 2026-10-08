@@ -63,7 +63,7 @@ In a second terminal, install dependencies and start Vite:
 
 ```powershell
 cd WebDev-Frontend
-npm ci
+npm i
 npm run dev
 ```
 
@@ -83,6 +83,5 @@ npm run dev
 
 ```powershell
 npm run build
-npm run lint
 npm test
 ```
