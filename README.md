@@ -39,7 +39,7 @@ Install dependencies and start the development server:
 
 ```powershell
 cd WebDev-Backend
-npm ci
+npm i
 npm run dev
 ```
 
@@ -76,7 +76,7 @@ Open the local URL printed by Vite, usually
 
 ```powershell
 npm run build
-npm start
+npm run dev
 ```
 
 ### Frontend
