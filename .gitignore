@@ -1,0 +1,43 @@
+# Dependencies
+**/node_modules/
+.pnpm-store/
+
+# Environment variables and secrets
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.sample
+
+# Build output and generated files
+**/dist/
+**/build/
+**/out/
+**/.tanstack/
+**/.vite/
+**/.vite-temp/
+**/*.tsbuildinfo
+
+# Test and coverage output
+**/coverage/
+**/playwright-report/
+**/test-results/
+**/.nyc_output/
+
+# Logs
+*.log
+logs/
+
+# Local caches and temporary files
+**/.cache/
+**/.tmp/
+*.tmp
+*.temp
+
+# Editor and OS files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
