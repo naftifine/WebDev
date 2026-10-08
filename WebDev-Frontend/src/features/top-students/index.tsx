@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Header } from '@/components/layout/header'
@@ -26,13 +26,6 @@ export function TopStudents() {
         <div className='me-auto text-sm font-medium'>Xếp hạng khối A</div>
       </Header>
       <Main>
-        <div className='mb-6 space-y-1'>
-          <h1 className='text-2xl font-bold tracking-tight'>Xếp hạng khối A</h1>
-          <p className='text-muted-foreground'>
-            Danh sách top 10 hoặc top 100 theo tổ hợp A00 (Toán, Vật lý, Hóa học)
-            và A01 (Toán, Vật lý, Ngoại ngữ).
-          </p>
-        </div>
         <Card>
           <CardHeader>
             <CardTitle className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
@@ -54,7 +47,6 @@ export function TopStudents() {
                 </Select>
               </div>
             </CardTitle>
-            <CardDescription>Danh sách thí sinh theo tổng điểm tổ hợp đã chọn.</CardDescription>
           </CardHeader>
           <CardContent>
             {rankingQuery.isPending && <p className='text-sm text-muted-foreground'>Đang tải bảng xếp hạng...</p>}
@@ -67,7 +59,7 @@ export function TopStudents() {
                   <TableRow>
                     <TableHead className='w-12'>#</TableHead>
                     <TableHead>Số báo danh</TableHead>
-                    <TableHead className='text-end'>Tổng điểm {combination.toUpperCase()}</TableHead>
+                    <TableHead className='text-end'>Tổng điểm</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -76,7 +68,7 @@ export function TopStudents() {
                       <TableCell className='font-medium'>{index + 1}</TableCell>
                       <TableCell>{student.sbd}</TableCell>
                       <TableCell className='text-end font-semibold'>
-                        {student.combinations?.[combination] ?? '-'}
+                        {student.combinations?.[combination]?.toFixed(1) ?? '-'}
                       </TableCell>
                     </TableRow>
                   ))}

@@ -3,7 +3,6 @@ import {
   BarChart,
   Legend,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts'
@@ -33,7 +32,12 @@ const subjectOrder = [
   'civics',
 ]
 
-const levelOrder = ['level4', 'level3', 'level2', 'level1']
+const levelOrder = [
+  { dataKey: 'level4', name: '< 4 điểm', fill: '#ef4444' },
+  { dataKey: 'level3', name: '4 – 6 điểm', fill: '#f59e0b' },
+  { dataKey: 'level2', name: '6 – 8 điểm', fill: '#16a34a' },
+  { dataKey: 'level1', name: '≥ 8 điểm', fill: '#2563eb' },
+] as const
 
 export function Overview({
   data: statistics = {},
@@ -69,17 +73,30 @@ export function Overview({
           tickLine={false}
           axisLine={false}
         />
-        <Tooltip
-          cursor={{ fill: 'hsl(var(--muted))' }}
-          itemSorter={(item) =>
-            levelOrder.indexOf(String(item.dataKey))
-          }
+        {levelOrder.map((level) => (
+          <Bar
+            key={level.dataKey}
+            dataKey={level.dataKey}
+            name={level.name}
+            fill={level.fill}
+            radius={[4, 4, 0, 0]}
+          />
+        ))}
+        <Legend
+          content={() => (
+            <div className='flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm'>
+              {levelOrder.map((level) => (
+                <div key={level.dataKey} className='flex items-center gap-2'>
+                  <span
+                    className='size-3 rounded-sm'
+                    style={{ backgroundColor: level.fill }}
+                  />
+                  <span>{level.name}</span>
+                </div>
+              ))}
+            </div>
+          )}
         />
-        <Legend />
-        <Bar dataKey='level4' name='< 4 điểm' fill='#ef4444' radius={[4, 4, 0, 0]} />
-        <Bar dataKey='level3' name='4 – 6 điểm' fill='#f59e0b' radius={[4, 4, 0, 0]} />
-        <Bar dataKey='level2' name='6 – 8 điểm' fill='#16a34a' radius={[4, 4, 0, 0]} />
-        <Bar dataKey='level1' name='≥ 8 điểm' fill='#2563eb' radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   )

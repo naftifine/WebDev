@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -64,5 +64,17 @@ export async function getTopExamScores(
   const response = await api.post<{
     data: RankingEntry[]
   }>('/rankings', { combination, limit })
-  return response.data.data
+  return response.data.data.map((entry) => {
+    const score = entry.combinations?.[combination]
+
+    if (typeof score !== 'number') return entry
+
+    return {
+      ...entry,
+      combinations: {
+        ...entry.combinations,
+        [combination]: Number(score.toFixed(1)),
+      },
+    }
+  })
 }

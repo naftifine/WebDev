@@ -29,7 +29,7 @@ export const sidebarData: SidebarData = {
           icon: Package,
         },
         {
-          title: 'Top 10 khối A',
+          title: 'Xếp hạng khối A',
           url: '/top-students',
           icon: ListTodo,
         },

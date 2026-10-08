@@ -40,8 +40,9 @@ app.use(examScoreRoutes);
 
 async function startServer() {
   await connectDatabase(env.mongoUri, env.mongoDbName);
-  app.listen(env.port, () => {
-    console.log(`Server running at http://localhost:${env.port}`);
+
+  app.listen(env.port, "0.0.0.0", () => {
+    console.log(`Server running on port ${env.port}`);
   });
 }
 
